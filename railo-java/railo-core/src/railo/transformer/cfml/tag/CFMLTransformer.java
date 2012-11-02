@@ -173,7 +173,7 @@ public final class CFMLTransformer {
 			CFMLString original = cfml; 
 			
 			// try inside a cfscript
-			tlt = CFMLTransformer.getTLT(original,"script");
+			tlt = CFMLTransformer.getTLT(original,"scriptx");
 			String text="<"+tlt.getFullName()+">"+original.getText()+"</"+tlt.getFullName()+">";
 			cfml=new CFMLString(text,charset,writeLog,sf);
 			

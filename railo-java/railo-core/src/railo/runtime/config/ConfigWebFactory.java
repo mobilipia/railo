@@ -2463,7 +2463,7 @@ public final class ConfigWebFactory {
 		else if (configServer!=null) {
 		    config.setMode(configServer.getMode());
 		}
-		
+		config.setMode(ConfigImpl.MODE_STRICT);
     }
     
     

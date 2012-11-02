@@ -47,46 +47,46 @@
     <tr>
         <td id="tableProps2" align="left" valign="middle" width="500">
             <h1 id="textSection1" style="COLOR: black; FONT: 13pt/15pt verdana">
-            <cfoutput>#HTMLEditFormat(catch.message)#</cfoutput>
+            <output>#HTMLEditFormat(catch.message)#</output>
             </h1>
         </td>
     </tr>
-	<cfif len(catch.detail)>
+	<if len(catch.detail)>
     <tr>
         <td id="tablePropsWidth" width="400" colspan="2">
             <font style="COLOR: black; FONT: 8pt/11pt verdana">
-            <cfoutput>#HTMLEditFormat(catch.detail)#</cfoutput>
+            <output>#HTMLEditFormat(catch.detail)#</output>
             </font>
         </td>
     </tr>
-	</cfif>
+	</if>
     <tr>
         <td height>&nbsp;</td>
     </tr>   
-	<cfif arrayLen(catch.tagcontext)>
+	<if arrayLen(catch.tagcontext)>
 	<tr>
 		<td width="400" colspan="2" style="COLOR: black; FONT: 8pt/11pt verdana">
-			<cfoutput><cfloop index="idx" from="1" to="#arraylen(catch.tagcontext)#">
-				<cfif idx EQ 1>The error occurred in <b>#catch.tagcontext[idx].template#:&nbsp;line #catch.tagcontext[idx].line#</b><br>
-				<cfelse><b>Called from</b> #catch.tagcontext[idx].template#:&nbsp;line #catch.tagcontext[idx].line#<br>
-				</cfif>
-			</cfloop></cfoutput>
+			<output><loop index="idx" from="1" to="#arraylen(catch.tagcontext)#">
+				<if idx EQ 1>The error occurred in <b>#catch.tagcontext[idx].template#:&nbsp;line #catch.tagcontext[idx].line#</b><br>
+				<else><b>Called from</b> #catch.tagcontext[idx].template#:&nbsp;line #catch.tagcontext[idx].line#<br>
+				</if>
+			</loop></output>
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2">
 			<br />
-			<cfoutput><span style="font-family:'Courier New', Courier, monospace;font-size:9pt;">#replace(catch.tagcontext[1].codeprinthtml,' ','&nbsp;','all')#</span></cfoutput>
+			<output><span style="font-family:'Courier New', Courier, monospace;font-size:9pt;">#replace(catch.tagcontext[1].codeprinthtml,' ','&nbsp;','all')#</span></output>
 		</td>
 	</tr>
-    </cfif>	
+    </if>	
 	<tr>
 		<td colspan="2">
 			<hr color="#C0C0C0" noshade>
 		</td>
 	</tr>
 
-    <cfoutput>
+    <output>
     <tr>
         <td colspan="2">
             <table border="0" cellpadding="0" cellspacing="0">
@@ -110,7 +110,7 @@
         </td>
     </tr>
     </table>
-    </cfoutput>
+    </output>
     
         <table width="500" cellpadding="0" cellspacing="0">
         <tr>
@@ -125,7 +125,7 @@
             <td id="cf_stacktrace" style="display:none">
                 <font style="COLOR: black; FONT: 8pt/11pt verdana">
                 
-			<cfoutput><pre>#HTMLEditFormat(catch.stacktrace)#</pre></cfoutput>
+			<output><pre>#HTMLEditFormat(catch.stacktrace)#</pre></output>
          	</td>
             </tr>
         </table>

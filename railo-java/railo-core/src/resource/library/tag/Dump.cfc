@@ -1,4 +1,4 @@
-﻿<cfscript>
+﻿<scriptX>
 component {
 
 	ColorCaster=createObject('java','railo.commons.color.ColorCaster');
@@ -484,4 +484,4 @@ component {
 
 
 }
-</cfscript>
+</scriptX>
