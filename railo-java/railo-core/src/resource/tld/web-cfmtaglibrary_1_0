@@ -3228,9 +3228,9 @@ If omitted, the file's attributes are maintained.</description>
 		the count.</description>
 		</attribute>
 	</tag>
-	<!-- Form -->
+	<!-- formX -->
 	<tag>
-		<name>form</name>
+		<name>formx</name>
 		<tag-class>railo.runtime.tag.Form</tag-class>
 		<allow-removing-literal>yes</allow-removing-literal>
 		<body-content>must</body-content>
@@ -3582,7 +3582,7 @@ If omitted, the file's attributes are maintained.</description>
 	</tag>
 	<!-- Formgroup -->
 	<tag>
-		<name>Formgroup</name>
+		<name>Formgroupx</name>
 		<tag-class>railo.runtime.tag.Formgroup</tag-class>
 		<body-content>must</body-content>
 		<body-rtexprvalue>false</body-rtexprvalue>
@@ -3730,7 +3730,7 @@ If omitted, the file's attributes are maintained.</description>
 	</tag>
 	<!-- Formitem -->
 	<tag>
-		<name>Formitem</name>
+		<name>Formitemx</name>
 		<tag-class>railo.runtime.tag.Formitem</tag-class>
 		<body-content>free</body-content>
 		<body-rtexprvalue>false</body-rtexprvalue>
@@ -6387,7 +6387,7 @@ Permits searching collections by title or displaying a separate title from the k
 
 	<!-- Input -->
 	<tag>
-		<name>input</name>
+		<name>inputx</name>
 		<tag-class>railo.runtime.tag.Input</tag-class>
 		<body-content>empty</body-content>
 		<body-rtexprvalue>false</body-rtexprvalue>

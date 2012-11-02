@@ -6,7 +6,7 @@
 	<set minus="#cgi.context_path#/railo-context/admin/resources/img/debug_minus.gif.cfm">
 
 </silent><output>
-<scriptX>
+<script>
 var plus='#plus#';
 var minus='#minus#';
 function oc(id) {
@@ -25,7 +25,7 @@ function oc(id) {
 		else button.src=plus;
 	}
 }
-</scriptX>
+</script>
 <scriptX>
 function convertST(st){
 	arguments.st=replace(HTMLEditFormat(arguments.st),"

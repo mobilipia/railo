@@ -1,6 +1,6 @@
-<cfcomponent extends="Debug" output="no">
+<component extends="Debug" output="no">
 
-	<cfscript>
+	<scriptX>
 		fields=array(
 		group("Execution Time","Execution times for templates, includes, modules, custom tags, and component method calls. Template execution times over this minimum highlight time appear in red.",3)
 		,field("Minimal Execution Time","minimal","0",true,{_appendix:"microseconds",_bottom:"Execution times for templates, includes, modules, custom tags, and component method calls. Outputs only templates taking longer than the time (in microseconds) defined above."},"text40")
@@ -58,71 +58,71 @@
 		if(!isDefined(columnName)) return true;
 		return !len(arrayToList(queryColumnData(qry,columnName),""));
 		}
-	</cfscript>
+	</scriptX>
  
-	<cffunction name="output" returntype="void">
-		<cfargument name="custom" type="struct" required="yes" />
-		<cfargument name="debugging" required="true" type="struct" />
-		<cfargument name="context" type="string" default="web" />
-		<cfsilent>
-			<cfset var time=getTickCount() />
-			<cfset var _cgi=structKeyExists(arguments.debugging,'cgi')?arguments.debugging.cgi:cgi />
-			<cfset var pages=arguments.debugging.pages />
-			<cfset var queries=arguments.debugging.queries />
-			<cfif not isDefined('arguments.debugging.timers')>
-				<cfset arguments.debugging.timers=queryNew('label,time,template') />
-			</cfif>
-			<cfif not isDefined('arguments.debugging.traces')>
-				<cfset arguments.debugging.traces=queryNew('type,category,text,template,line,var,total,trace') />
-			</cfif>
-			<cfset var timers=arguments.debugging.timers />
-			<cfset var traces=arguments.debugging.traces />
-			<cfset querySort(pages,"avg","desc") />
-			<cfset var implicitAccess=arguments.debugging.implicitAccess />
-			<cfset querySort(implicitAccess,"template,line,count","asc,asc,desc") />
-			<cfparam name="arguments.custom.unit" default="millisecond">
-			<cfparam name="arguments.custom.color" default="black">
-			<cfparam name="arguments.custom.bgcolor" default="white">
-			<cfparam name="arguments.custom.font" default="Times New Roman">
-			<cfparam name="arguments.custom.size" default="medium">
-			<cfset var unit={
+	<function name="output" returntype="void">
+		<argument name="custom" type="struct" required="yes" />
+		<argument name="debugging" required="true" type="struct" />
+		<argument name="context" type="string" default="web" />
+		<silent>
+			<set var time=getTickCount() />
+			<set var _cgi=structKeyExists(arguments.debugging,'cgi')?arguments.debugging.cgi:cgi />
+			<set var pages=arguments.debugging.pages />
+			<set var queries=arguments.debugging.queries />
+			<if not isDefined('arguments.debugging.timers')>
+				<set arguments.debugging.timers=queryNew('label,time,template') />
+			</if>
+			<if not isDefined('arguments.debugging.traces')>
+				<set arguments.debugging.traces=queryNew('type,category,text,template,line,var,total,trace') />
+			</if>
+			<set var timers=arguments.debugging.timers />
+			<set var traces=arguments.debugging.traces />
+			<set querySort(pages,"avg","desc") />
+			<set var implicitAccess=arguments.debugging.implicitAccess />
+			<set querySort(implicitAccess,"template,line,count","asc,asc,desc") />
+			<param name="arguments.custom.unit" default="millisecond">
+			<param name="arguments.custom.color" default="black">
+			<param name="arguments.custom.bgcolor" default="white">
+			<param name="arguments.custom.font" default="Times New Roman">
+			<param name="arguments.custom.size" default="medium">
+			<set var unit={
 				millisecond:"ms"
 				,microsecond:"µs"
 				,nanosecond:"ns"
 				} />
 			<!--- Plus/minus Image --->
-			<cfoutput>
-				<cfset var plus="#cgi.context_path#/railo-context/admin/resources/img/plus.png.cfm" />
-				<cfset var minus="#cgi.context_path#/railo-context/admin/resources/img/minus.png.cfm" />
-				<cfsavecontent variable="local.sImgPlus">
+			<output>
+				<set var plus="#cgi.context_path#/railo-context/admin/resources/img/plus.png.cfm" />
+				<set var minus="#cgi.context_path#/railo-context/admin/resources/img/minus.png.cfm" />
+				<savecontent variable="local.sImgPlus">
 					<img src="#plus#">
-				</cfsavecontent>
-				<cfsavecontent variable="local.sImgMinus">
+				</savecontent>
+				<savecontent variable="local.sImgMinus">
 					<img src="#minus#">
-				</cfsavecontent>
-			</cfoutput>
-		</cfsilent>
-		<cfif arguments.context EQ "web">
-			</td></td></td></th></th></th></tr></tr></tr></table></table></table></a></abbrev></acronym></address></applet></au></b></banner></big></blink></blockquote></bq></caption></center></cite></code></comment></del></dfn></dir></div></div></dl></em></fig></fn></font></form></frame></frameset></h1></h2></h3></h4></h5></h6></head></i></ins></kbd></listing></map></marquee></menu></multicol></nobr></noframes></noscript></note></ol></p></param></person></plaintext></pre></q></s></samp></script></select></small></strike></strong></sub></sup></table></td></textarea></th></title></tr></tt></u></ul></var></wbr></xmp>
-		</cfif>
-		<cfoutput>
+				</savecontent>
+			</output>
+		</silent>
+		<if arguments.context EQ "web">
+			</td></td></td></th></th></th></tr></tr></tr></table></table></table></a></abbrev></acronym></address></applet></au></b></banner></big></blink></blockquote></bq></caption></center></cite></code></comment></del></dfn></dir></div></div></dl></em></fig></fn></font></form></frame></frameset></h1></h2></h3></h4></h5></h6></head></i></ins></kbd></listing></map></marquee></menu></multicol></nobr></noframes></noscript></note></ol></p></person></plaintext></pre></q></s></samp></script></select></small></strike></strong></sub></sup></table></td></textarea></th></title></tr></tt></u></ul></var></wbr></xmp>
+		</if>
+		<output>
 			<style type="text/css">
 				.h1 {font-weight:normal;font-family:'Helvetica Neue', Arial, Helvetica, sans-serif;font-size : 20pt;color:##007bb7;} .h2 {height:6pt;font-size : 12pt;font-weight:normal;color:##007bb7;} .cfdebug {font-family:'Helvetica Neue', Arial, Helvetica, sans-serif;font-size : 9pt;color:##3c3e40;} .cfdebuglge {color:#arguments.custom.color#;background-color:#arguments.custom.bgcolor#;font-family:#arguments.custom.font#; font-size:
-				<cfif arguments.custom.size EQ "small">
+				<if arguments.custom.size EQ "small">
 					small
-				<cfelseif arguments.custom.size EQ "medium">
+				<elseif arguments.custom.size EQ "medium">
 					medium
-				<cfelse>
+				<else>
 					large
-				</cfif>
+				</if>
 				;} .template_overage { color: red; background-color: #arguments.custom.bgcolor#; font-family:#arguments.custom.font#; font-weight: bold; font-size:
-				<cfif arguments.custom.size EQ "small">
+				<if arguments.custom.size EQ "small">
 					smaller
-				<cfelseif arguments.custom.size EQ "medium">
+				<elseif arguments.custom.size EQ "medium">
 					small
-				<cfelse>
+				<else>
 					medium
-				</cfif>
+				</if>
 				; } .tbl{empty-cells:show;font-family:'Helvetica Neue', Arial, Helvetica, sans-serif;font-size : 9pt;color:##3c3e40;} .tblHead{padding-left:5px;padding-right:5px;border:1px solid ##e0e0e0;background-color:##f2f2f2;color:##3c3e40} .tblContent {padding-left:5px;padding-right:5px;border:1px solid ##e0e0e0;background-color:##ffffff;} .tblContentRed {padding-left:5px;padding-right:5px;border:1px solid ##cc0000;background-color:##f9e0e0;} .tblContentGreen {padding-left:5px;padding-right:5px;border:1px solid ##009933;background-color:##e0f3e6;} .tblContentYellow {padding-left:5px;padding-right:5px;border:1px solid ##ccad00;background-color:##fff9da;} 
 			</style>
 			<SCRIPT LANGUAGE="JavaScript"> plus='#plus#'; minus='#minus#'; <!--
@@ -195,10 +195,10 @@
 			<tr>
 			<td class="tblContent" style="padding:10px">
 			<!--- General --->
-			<cfset local.display=structKeyExists(cookie,'railo_debug_modern_info') and cookie.railo_debug_modern_info />
+			<set local.display=structKeyExists(cookie,'railo_debug_modern_info') and cookie.railo_debug_modern_info />
 			
 		
-			<cfif isEnabled(arguments.custom,'general')>
+			<if isEnabled(arguments.custom,'general')>
 				<span class="h2">Debugging Information</span>
 				<table class="tbl" cellpadding="0" cellspacing="0">
 					<tr>
@@ -226,11 +226,11 @@
 								<tr>
 									<td class="cfdebug" colspan="2" nowrap>
 										#server.coldfusion.productname# 
-										<cfif StructKeyExists(server.railo,'versionName')>
+										<if StructKeyExists(server.railo,'versionName')>
 											(
 											<a href="#server.railo.versionNameExplanation#" target="_blank">#server.railo.versionName#</a>
 											)
-										</cfif>
+										</if>
 										#ucFirst(server.coldfusion.productlevel)# #uCase(server.railo.state)# #server.railo.version# (CFML Version #server.ColdFusion.ProductVersion#) 
 									</td>
 								</tr>
@@ -254,45 +254,45 @@
 									<td class="cfdebug" nowrap>Host Name</td>
 									<td class="cfdebug">#_cgi.server_name#</td>
 								</tr>
-								<cfif StructKeyExists(server.os,"archModel") and StructKeyExists(server.java,"archModel")>
+								<if StructKeyExists(server.os,"archModel") and StructKeyExists(server.java,"archModel")>
 									<tr>
 										<td class="cfdebug" nowrap>Architecture</td>
 										<td class="cfdebug">
-											<cfif server.os.archModel NEQ server.os.archModel>
+											<if server.os.archModel NEQ server.os.archModel>
 												OS #server.os.archModel#bit/JRE #server.java.archModel#bit
-											<cfelse>
+											<else>
 												#server.os.archModel#bit
-											</cfif>
+											</if>
 										</td>
 									</tr>
-								</cfif>
+								</if>
 							</table>
 							<br>
 							</div> 
 						</td>
 					</tr>
 				</table>
-			</cfif>
+			</if>
 			
 			
 			
 		<!--- Execution Time --->
-			<cfset display=structKeyExists(cookie,'railo_debug_modern_exe') and cookie.railo_debug_modern_exe />
+			<set display=structKeyExists(cookie,'railo_debug_modern_exe') and cookie.railo_debug_modern_exe />
 			<span class="h2"><a name="cfdebug_execution">
 					Execution Time
 				</a></span>
-			<cfset local.loa=0 />
-			<cfset local.tot=0 />
-			<cfset local.q=0 />
-			<cfloop query="pages">
-				<cfset tot=tot+pages.total />
-				<cfset q=q+pages.query />
-				<cfif pages.avg LT arguments.custom.minimal*1000>
-					<cfcontinue>
-				</cfif>
-				<cfset local.bad=pages.avg GTE arguments.custom.highlight*1000 />
-				<cfset loa=loa+pages.load />
-			</cfloop>
+			<set local.loa=0 />
+			<set local.tot=0 />
+			<set local.q=0 />
+			<loop query="pages">
+				<set tot=tot+pages.total />
+				<set q=q+pages.query />
+				<if pages.avg LT arguments.custom.minimal*1000>
+					<continue>
+				</if>
+				<set local.bad=pages.avg GTE arguments.custom.highlight*1000 />
+				<set loa=loa+pages.load />
+			</loop>
 			<table class="tbl" cellpadding="0" cellspacing="0">
 				<tr>
 					<td valign="top">
@@ -335,37 +335,37 @@
 								<td class="tblHead" align="center">Count</td>
 								<td class="tblHead">Template</td>
 							</tr>
-							<cfset loa=0 />
-							<cfset tot=0 />
-							<cfset q=0 />
-							<cfloop query="pages">
-								<cfset tot=tot+pages.total />
-								<cfset q=q+pages.query />
-								<cfif pages.avg LT arguments.custom.minimal*1000>
-									<cfcontinue>
-								</cfif>
-								<cfset bad=pages.avg GTE arguments.custom.highlight*1000 />
-								<cfset loa=loa+pages.load />
+							<set loa=0 />
+							<set tot=0 />
+							<set q=0 />
+							<loop query="pages">
+								<set tot=tot+pages.total />
+								<set q=q+pages.query />
+								<if pages.avg LT arguments.custom.minimal*1000>
+									<continue>
+								</if>
+								<set bad=pages.avg GTE arguments.custom.highlight*1000 />
+								<set loa=loa+pages.load />
 								<tr>
 									<td align="right" class="tblContent" nowrap>
-										<cfif bad>
+										<if bad>
 											<font color="red">
-										</cfif>
-										#formatUnit(arguments.custom.unit, pages.total-pages.load)#<cfif bad></font></cfif>
+										</if>
+										#formatUnit(arguments.custom.unit, pages.total-pages.load)#<if bad></font></if>
 									</td>
 									<td align="right" class="tblContent" nowrap>
-										<cfif bad>
-											<font color="red"></cfif>
-										#formatUnit(arguments.custom.unit, pages.avg)#<cfif bad></font></cfif>
+										<if bad>
+											<font color="red"></if>
+										#formatUnit(arguments.custom.unit, pages.avg)#<if bad></font></if>
 									</td>
 									<td align="center" class="tblContent" nowrap>#pages.count#</td>
 									<td align="left" class="tblContent" nowrap>
-										<cfif bad>
-											<font color="red"></cfif>
-										#pages.src#<cfif bad></font></cfif>
+										<if bad>
+											<font color="red"></if>
+										#pages.src#<if bad></font></if>
 									</td>
 								</tr>
-							</cfloop>
+							</loop>
 						</table>
 						<font color="red">
 							red = over #formatUnit(arguments.custom.unit,arguments.custom.highlight*1000)# average execution time
@@ -377,9 +377,9 @@
 				</tr>
 			</table>
 			<!--- Exceptions --->
-			<cfif isEnabled(arguments.custom,"exception") and structKeyExists(arguments.debugging,"exceptions")  and arrayLen(arguments.debugging.exceptions)>
-				<cfset display=structKeyExists(cookie,'railo_debug_modern_exp') and cookie.railo_debug_modern_exp />
-				<cfset exceptions=debugging.exceptions />
+			<if isEnabled(arguments.custom,"exception") and structKeyExists(arguments.debugging,"exceptions")  and arrayLen(arguments.debugging.exceptions)>
+				<set display=structKeyExists(cookie,'railo_debug_modern_exp') and cookie.railo_debug_modern_exp />
+				<set exceptions=debugging.exceptions />
 				<span class="h2">Caught Exceptions</span>
 				<table class="tbl" cellpadding="0" cellspacing="0">
 					<tr>
@@ -408,26 +408,26 @@
 									<td class="tblHead">Detail</td>
 									<td class="tblHead">Template</td>
 								</tr>
-								<cfloop array="#exceptions#" index="exp">
+								<loop array="#exceptions#" index="exp">
 									<tr>
 										<td class="tblContent" nowrap>#exp.type#</td>
 										<td class="tblContent" nowrap>#exp.message#</td>
 										<td class="tblContent" nowrap>#exp.detail#</td>
 										<td class="tblContent" nowrap>#exp.TagContext[1].template#:#exp.TagContext[1].line#</td>
 									</tr>
-								</cfloop>
+								</loop>
 							</table>
 							<br>
 							</div> 
 						</td>
 					</tr>
 				</table>
-			</cfif>
+			</if>
 			<!--- Implicit variable Access --->
-			<cfif isEnabled(arguments.custom,"implicitAccess") and implicitAccess.recordcount>
-				<cfset display=structKeyExists(cookie,'railo_debug_modern_acc') and cookie.railo_debug_modern_acc />
-				<cfset hasAction=!isColumnEmpty(traces,'action') />
-				<cfset hasCategory=!isColumnEmpty(traces,'category') />
+			<if isEnabled(arguments.custom,"implicitAccess") and implicitAccess.recordcount>
+				<set display=structKeyExists(cookie,'railo_debug_modern_acc') and cookie.railo_debug_modern_acc />
+				<set hasAction=!isColumnEmpty(traces,'action') />
+				<set hasCategory=!isColumnEmpty(traces,'category') />
 				<span class="h2">Implicit variable Access</span>
 				<table class="tbl" cellpadding="0" cellspacing="0">
 					<tr>
@@ -457,8 +457,8 @@
 									<td class="tblHead">Var</td>
 									<td class="tblHead">Count</td>
 								</tr>
-								<cfset total=0 />
-								<cfloop query="implicitAccess">
+								<set total=0 />
+								<loop query="implicitAccess">
 									<tr>
 										<td align="left" class="tblContent" nowrap>#implicitAccess.scope#</td>
 										<td align="left" class="tblContent" nowrap>#implicitAccess.template#</td>
@@ -466,17 +466,17 @@
 										<td align="left" class="tblContent" nowrap>#implicitAccess.name#</td>
 										<td align="left" class="tblContent" nowrap>#implicitAccess.count#</td>
 									</tr>
-								</cfloop>
+								</loop>
 							</table>
 							<br>
 							</div> 
 						</td>
 					</tr>
 				</table>
-			</cfif>
+			</if>
 			<!--- Timers --->
-			<cfif isEnabled(arguments.custom,"timer") and timers.recordcount>
-				<cfset display=structKeyExists(cookie,'railo_debug_modern_time') and cookie.railo_debug_modern_time />
+			<if isEnabled(arguments.custom,"timer") and timers.recordcount>
+				<set display=structKeyExists(cookie,'railo_debug_modern_time') and cookie.railo_debug_modern_time />
 				<span class="h2">CFTimer Times</span>
 				<table class="tbl" cellpadding="0" cellspacing="0">
 					<tr>
@@ -502,25 +502,25 @@
 									<td class="tblHead">Time</td>
 									<td class="tblHead">Template</td>
 								</tr>
-								<cfloop query="timers">
+								<loop query="timers">
 									<tr>
 										<td align="right" class="tblContent" nowrap>#timers.label#</td>
 										<td align="right" class="tblContent" nowrap>#formatUnit(arguments.custom.unit, timers.time)#</td>
 										<td align="right" class="tblContent" nowrap>#timers.template#</td>
 									</tr>
-								</cfloop>
+								</loop>
 							</table>
 							<br>
 							</div> 
 						</td>
 					</tr>
 				</table>
-			</cfif>
+			</if>
 			<!--- Traces --->
-			<cfif isEnabled(arguments.custom,"tracing") and traces.recordcount>
-				<cfset display=structKeyExists(cookie,'railo_debug_modern_trace') and cookie.railo_debug_modern_trace />
-				<cfset hasAction=!isColumnEmpty(traces,'action') />
-				<cfset hasCategory=!isColumnEmpty(traces,'category') />
+			<if isEnabled(arguments.custom,"tracing") and traces.recordcount>
+				<set display=structKeyExists(cookie,'railo_debug_modern_trace') and cookie.railo_debug_modern_trace />
+				<set hasAction=!isColumnEmpty(traces,'action') />
+				<set hasCategory=!isColumnEmpty(traces,'category') />
 				<span class="h2">Trace Points</span>
 				<table class="tbl" cellpadding="0" cellspacing="0">
 					<tr>
@@ -543,62 +543,62 @@
 							<table class="tbl" cellpadding="2" cellspacing="0">
 								<tr>
 									<td class="tblHead">Type</td>
-									<cfif hasCategory>
+									<if hasCategory>
 										<td class="tblHead">Category</td>
-									</cfif>
+									</if>
 									<td class="tblHead">Text</td>
 									<td class="tblHead">Template</td>
 									<td class="tblHead">Line</td>
-									<cfif hasAction>
+									<if hasAction>
 										<td class="tblHead">Action</td>
-									</cfif>
+									</if>
 									<td class="tblHead">Var</td>
 									<td class="tblHead">Total Time</td>
 									<td class="tblHead">Trace Slot Time</td>
 								</tr>
-								<cfset total=0 />
-								<cfloop query="traces">
-									<cfset total=total+traces.time />
+								<set total=0 />
+								<loop query="traces">
+									<set total=total+traces.time />
 									<tr>
 										<td align="left" class="tblContent" nowrap>#traces.type#</td>
-										<cfif hasCategory>
+										<if hasCategory>
 											<td align="left" class="tblContent" nowrap>#traces.category#&nbsp;</td>
-										</cfif>
+										</if>
 										<td align="let" class="tblContent" nowrap>#traces.text#&nbsp;</td>
 										<td align="left" class="tblContent" nowrap>#traces.template#</td>
 										<td align="right" class="tblContent" nowrap>#traces.line#</td>
-										<cfif hasAction>
+										<if hasAction>
 											<td align="left" class="tblContent" nowrap>#traces.action#</td>
-										</cfif>
+										</if>
 										<td align="left" class="tblContent" nowrap>
-											<cfif len(traces.varName)>
+											<if len(traces.varName)>
 												#traces.varName#
-												<cfif structKeyExists(traces,'varValue')>
+												<if structKeyExists(traces,'varValue')>
 													= #traces.varValue#
-												</cfif>
-											<cfelse>
+												</if>
+											<else>
 												&nbsp;
 												<br />
-											</cfif>
+											</if>
 										</td>
 										<td align="right" class="tblContent" nowrap>#formatUnit(arguments.custom.unit, total)#</td>
 										<td align="right" class="tblContent" nowrap>#formatUnit(arguments.custom.unit, traces.time)#</td>
 									</tr>
-								</cfloop>
+								</loop>
 							</table>
 							<br>
 							</div> 
 						</td>
 					</tr>
 				</table>
-			</cfif>
+			</if>
 			<!--- Queries --->
-			<cfif isEnabled(arguments.custom,"database") and queries.recordcount>
-				<cfset local.total=0 />
-				<cfset local.records=0 />
-				<cfloop query="queries"><cfset total+=queries.time />
-					<cfset records+=queries.count /></cfloop>
-				<cfset display=structKeyExists(cookie,'railo_debug_modern_qry') and cookie.railo_debug_modern_qry />
+			<if isEnabled(arguments.custom,"database") and queries.recordcount>
+				<set local.total=0 />
+				<set local.records=0 />
+				<loop query="queries"><set total+=queries.time />
+					<set records+=queries.count /></loop>
+				<set display=structKeyExists(cookie,'railo_debug_modern_qry') and cookie.railo_debug_modern_qry />
 				<span class="h2">SQL Queries</span>
 				<table class="tbl" cellpadding="0" cellspacing="0">
 					<tr>
@@ -626,63 +626,63 @@
 						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 						<td>
 							<div id="qry_body" style="display:#display?"":"none"#;"> 
-							<cfloop query="queries">
+							<loop query="queries">
 								<code>
 									<b>#queries.name#</b>
 									(Datasource=#queries.datasource#, Time=#formatUnit(arguments.custom.unit, queries.time)#, Records=#queries.count#) in #queries.src#
 								</code>
 								<br/>
-								<cfif ListFindNoCase(queries.columnlist,'usage') and IsStruct(queries.usage)>
-									<cfset local.usage=queries.usage />
-									<cfset local.lstNeverRead="" />
-									<cfset local.lstRead = "" />
-									<cfloop collection="#usage#" index="local.item" item="local.value">
-										<cfif not value>
-											<cfset lstNeverRead=ListAppend(lstNeverRead,item,', ') />
-										<cfelse>
-											<cfset lstRead=ListAppend(lstRead,item,', ') />
-										</cfif>
-									</cfloop>
+								<if ListFindNoCase(queries.columnlist,'usage') and IsStruct(queries.usage)>
+									<set local.usage=queries.usage />
+									<set local.lstNeverRead="" />
+									<set local.lstRead = "" />
+									<loop collection="#usage#" index="local.item" item="local.value">
+										<if not value>
+											<set lstNeverRead=ListAppend(lstNeverRead,item,', ') />
+										<else>
+											<set lstRead=ListAppend(lstRead,item,', ') />
+										</if>
+									</loop>
 									<b>Query usage within the request:</b>
 									<br />
-									<cfif len(lstRead)>
+									<if len(lstRead)>
 										<font color="green">
 											used columns: <b>#lstRead#</b>
 										</font>
 										<br />
-									</cfif>
-									<cfif len(lstNeverRead)>
+									</if>
+									<if len(lstNeverRead)>
 										<font color="red">
 											unused columns: <b>#lstNeverRead#</b>
 											<br />
 											Usage: <b>#numberFormat(listLen(lstRead)/(listLen(lstRead)+listLen(lstNeverRead))*100, "999.9")# %</b>
 										</font>
-									</cfif>
-								</cfif>
+									</if>
+								</if>
 								<br /><b>SQL:</b>
 								<pre>#queries.sql#</pre>
-							</cfloop>
+							</loop>
 							<br>
 							</div> 
 						</td>
 					</tr>
 				</table>
-			</cfif>
+			</if>
 			
 			
 			
 			<!--- Scopes --->
-			<cfif isEnabled(arguments.custom,"scopes")>
+			<if isEnabled(arguments.custom,"scopes")>
 				
-				<cfset local.scopes = "application,CGI,cookie,form,request,server,URL">
+				<set local.scopes = "application,CGI,cookie,form,request,server,URL">
 			
 			
 				<span class="h2">Scope Information</span>
 				<table class="tbl" cellpadding="0" cellspacing="0">
 					
-							<cfloop list="#local.scopes#" index="local.k">
-								<cfset local.v=evaluate(k)>
-								<cfset local.display=structKeyExists(cookie,'railo_debug_modern_scope_#k#') and cookie['railo_debug_modern_scope_#k#'] />
+							<loop list="#local.scopes#" index="local.k">
+								<set local.v=evaluate(k)>
+								<set local.display=structKeyExists(cookie,'railo_debug_modern_scope_#k#') and cookie['railo_debug_modern_scope_#k#'] />
 								
 									<td valign="top" nowrap="true">
 										<a href="javascript:railoDebugModernToggle('scope_#k#')"><img vspace="4" src="#display?minus:plus#" id="scope_#k#_img"></a> 
@@ -694,63 +694,63 @@
 											<td align="right">Element Count</td>
 											<td>&nbsp;#sizeOf.count#</td>
 										</tr>--->
-										<cfset local.sc=StructCount(v)>
+										<set local.sc=StructCount(v)>
 										<tr>
 											<td align="right">Estimate Size</td>
-											<td>&nbsp;<cftry>#byteFormat(sc==0?0:sizeOf(v))#<cfcatch>not available</cfcatch></cftry></td>
+											<td>&nbsp;<try>#byteFormat(sc==0?0:sizeOf(v))#<catch>not available</catch></try></td>
 										</tr>
 									</table></td>
 								</tr>
 								<tr>
 									<td></td>
 									<td><div id="scope_#k#_body" style="display:#display?"":"none"#;">
-										<cfif local.display>
-										<cftry><cfdump var="#v#" keys="1000" label="#sc GT 1000?"First 1000 Records":""#"><cfcatch>not available</cfcatch></cftry>
-										<cfelse>
+										<if local.display>
+										<try><dump var="#v#" keys="1000" label="#sc GT 1000?"First 1000 Records":""#"><catch>not available</catch></try>
+										<else>
 											the Scope will be displayed with the next request
-										</cfif>
+										</if>
 									</div></td>
 								</tr>
-							</cfloop>
+							</loop>
 							
 				</table>
-			</cfif>
+			</if>
 			
 			</td>
 			</tr>
 			</table>
-		</cfoutput>
+		</output>
 
-	</cffunction>
+	</function>
 
 
-	<cffunction name="ReplaceSQLStatements" output="No" returntype="struct">
-		<cfargument name="sSql" required="Yes" type="string" />
-		<cfset var sSql = Replace(arguments.sSql, Chr(9), " ", "ALL") />
-		<cfset var aWords = ['select','from','where','order by','group by','having'] />
-		<cfloop from="1" to="3" index="local.i">
-			<cfset sSql = Replace(sSql, "  ", " ", "ALL") />
-			<cfset sSql = Replace(sSql, Chr(10), "", "ALL") />
-			<cfset sSql = Replace(sSql, "#CHR(13)# #CHR(13)#", CHR(13), "ALL") />
-		</cfloop>
-		<cfset sSql = Replace(sSql, "#CHR(13)# #CHR(13)#", CHR(13), "ALL") />
-		<cfloop collection="#aWords#" item="local.sWord">
-			<cfset sSql = ReplaceNoCase(sSQL, aWords[sWord], "#UCase(aWords[sWord])##chr(9)#", "ALL") />
-		</cfloop>
-		<cfset local.stRet       = {} />
-		<cfset stRet.sSql        = Trim(sSql) />
-		<cfset stRet.Executeable = True />
-		<cfset aWords = ["drop ,delete ,update ,insert ,alter database ,alter table "] />
-		<cfloop collection="#aWords#" item="sWord">
-			<cfif FindNoCase(aWords[sWord], sSql)>
-				<cfset stRet.Executeable = False />
-				<cfbreak>
-			</cfif>
-		</cfloop>
-		<cfreturn stRet />
-	</cffunction>
+	<function name="ReplaceSQLStatements" output="No" returntype="struct">
+		<argument name="sSql" required="Yes" type="string" />
+		<set var sSql = Replace(arguments.sSql, Chr(9), " ", "ALL") />
+		<set var aWords = ['select','from','where','order by','group by','having'] />
+		<loop from="1" to="3" index="local.i">
+			<set sSql = Replace(sSql, "  ", " ", "ALL") />
+			<set sSql = Replace(sSql, Chr(10), "", "ALL") />
+			<set sSql = Replace(sSql, "#CHR(13)# #CHR(13)#", CHR(13), "ALL") />
+		</loop>
+		<set sSql = Replace(sSql, "#CHR(13)# #CHR(13)#", CHR(13), "ALL") />
+		<loop collection="#aWords#" item="local.sWord">
+			<set sSql = ReplaceNoCase(sSQL, aWords[sWord], "#UCase(aWords[sWord])##chr(9)#", "ALL") />
+		</loop>
+		<set local.stRet       = {} />
+		<set stRet.sSql        = Trim(sSql) />
+		<set stRet.Executeable = True />
+		<set aWords = ["drop ,delete ,update ,insert ,alter database ,alter table "] />
+		<loop collection="#aWords#" item="sWord">
+			<if FindNoCase(aWords[sWord], sSql)>
+				<set stRet.Executeable = False />
+				<break>
+			</if>
+		</loop>
+		<return stRet />
+	</function>
 
-	<cfscript>
+	<scriptX>
 		function RGBtoHex(r,g,b){
 			Var hexColor="";
 			Var hexPart = '';
@@ -786,42 +786,42 @@
 			return structKeyExists(arguments.custom,key) and (arguments.custom[arguments.key] EQ "Enabled" or arguments.custom[arguments.key] EQ "true");
 		}
 		
-	</cfscript>
+	</scriptX>
  
-	<cffunction name="formatUnit" output="no" returntype="string">
-		<cfargument name="unit" type="string" required="yes" />
-		<cfargument name="time" type="numeric" required="yes" />
-		<cfif arguments.time GTE 100000000>
+	<function name="formatUnit" output="no" returntype="string">
+		<argument name="unit" type="string" required="yes" />
+		<argument name="time" type="numeric" required="yes" />
+		<if arguments.time GTE 100000000>
 			<!--- 1000ms --->
-			<cfreturn int(arguments.time/1000000)&" ms" />
-		<cfelseif arguments.time GTE 10000000>
+			<return int(arguments.time/1000000)&" ms" />
+		<elseif arguments.time GTE 10000000>
 			<!--- 100ms --->
-			<cfreturn (int(arguments.time/100000)/10)&" ms" />
-		<cfelseif arguments.time GTE 1000000>
+			<return (int(arguments.time/100000)/10)&" ms" />
+		<elseif arguments.time GTE 1000000>
 			<!--- 10ms --->
-			<cfreturn (int(arguments.time/10000)/100)&" ms" />
-		<cfelse>
+			<return (int(arguments.time/10000)/100)&" ms" />
+		<else>
 			<!--- 0ms --->
-			<cfreturn (int(arguments.time/1000)/1000)&" ms" />
-		</cfif>
-		<cfreturn (arguments.time/1000000)&" ms" />
-	</cffunction>
+			<return (int(arguments.time/1000)/1000)&" ms" />
+		</if>
+		<return (arguments.time/1000000)&" ms" />
+	</function>
 	
-	<cffunction name="byteFormat" output="no">
-        <cfargument name="raw" type="numeric">
-        <cfif raw EQ 0><cfreturn "0b"></cfif>
-        <cfset var b=raw>
-        <cfset var rtn="">
-        <cfset var kb=b/1024>
-        <cfset var mb=kb/1024>
-        <cfset var gb=mb/1024>
-        <cfset var tb=gb/1024>
+	<function name="byteFormat" output="no">
+        <argument name="raw" type="numeric">
+        <if raw EQ 0><return "0b"></if>
+        <set var b=raw>
+        <set var rtn="">
+        <set var kb=b/1024>
+        <set var mb=kb/1024>
+        <set var gb=mb/1024>
+        <set var tb=gb/1024>
         
-        <cfif tb GTE 1><cfreturn numberFormat(tb,'0.0')&"tb"></cfif>
-        <cfif gb GTE 1><cfreturn numberFormat(gb,'0.0')&"gb"></cfif>
-        <cfif mb GTE 1><cfreturn numberFormat(mb,'0.0')&"mb"></cfif>
-        <cfif  b GT 100><cfreturn numberFormat(kb,'0.0')&"kb"></cfif>
-		<cfreturn b&"b">
-    </cffunction>
+        <if tb GTE 1><return numberFormat(tb,'0.0')&"tb"></if>
+        <if gb GTE 1><return numberFormat(gb,'0.0')&"gb"></if>
+        <if mb GTE 1><return numberFormat(mb,'0.0')&"mb"></if>
+        <if  b GT 100><return numberFormat(kb,'0.0')&"kb"></if>
+		<return b&"b">
+    </function>
 
-</cfcomponent>
+</component>
