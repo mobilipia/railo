@@ -6,7 +6,7 @@
 	<cfml-version>1.0</cfml-version>
 	<short-name>tbase</short-name>
 	<uri>http://www.railo-technologies.com/cf-tld-3-1</uri>
-	<display-name>Railo Core Tag Library</display-name>
+	<display-name>htmlX Core Tag Library</display-name>
 	<description></description>
 	<name-space></name-space>
 	<name-space-separator/>
